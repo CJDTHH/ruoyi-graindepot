@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增仓房信息')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-warehouse-add">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">仓库名称：</label>
+                <div class="col-sm-3">
+                    <input name="warehouseName" class="form-control" type="text">
+                </div>
+
+                <label class="col-sm-2 control-label">额定容量(kg)：</label>
+                <div class="col-sm-3">
+                    <input name="warehouseCapacity" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label is-required">仓房类型：</label>
+                <div class="col-sm-3">
+                    <select name="warehouseType" class="form-control m-b" required>
+                    </select>
+                </div>
+
+                <label class="col-sm-2 control-label">仓房状态：</label>
+                <div class="col-sm-2">
+                    <div class="radio-box">
+                        <input type="radio" name="warehouseStatus" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">保管员：</label>
+                <div class="col-sm-3">
+                    <input name="keeper" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "system/warehouse"
+        $("#form-warehouse-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-warehouse-add').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

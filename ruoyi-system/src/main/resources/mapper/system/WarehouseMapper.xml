@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.WarehouseMapper">
+
+    <resultMap type="Warehouse" id="WarehouseResult">
+        <result property="warehouseId"    column="warehouse_id"    />
+        <result property="parent"    column="parent"    />
+        <result property="orgId"    column="org_id"    />
+        <result property="orgCode"    column="org_code"    />
+        <result property="warehouseName"    column="warehouse_name"    />
+        <result property="warehouseNumber"    column="warehouse_number"    />
+        <result property="warehouseDesc"    column="warehouse_desc"    />
+        <result property="warehouseStatus"    column="warehouse_status"    />
+        <result property="warehouseCapacity"    column="warehouse_capacity"    />
+        <result property="isAvailable"    column="is_available"    />
+        <result property="warehouseType"    column="warehouse_type"    />
+        <result property="warehouseSmalltype"    column="warehouse_smalltype"    />
+        <result property="dictinfoCode"    column="dictinfo_code"    />
+        <result property="orderIndex"    column="order_index"    />
+        <result property="jgQiangTi"    column="jg_qiang_ti"    />
+        <result property="jgFangDing"    column="jg_fang_ding"    />
+        <result property="jgFangJia"    column="jg_fang_jia"    />
+        <result property="jgDiMian"    column="jg_di_mian"    />
+        <result property="cwChang"    column="cw_chang"    />
+        <result property="cwKuan"    column="cw_kuan"    />
+        <result property="cwYanGao"    column="cw_yan_gao"    />
+        <result property="cwDingGao"    column="cw_ding_gao"    />
+        <result property="cnChang"    column="cn_chang"    />
+        <result property="cnKuan"    column="cn_kuan"    />
+        <result property="cnYanGao"    column="cn_yan_gao"    />
+        <result property="cnDingGao"    column="cn_ding_gao"    />
+        <result property="kmShuLiang"    column="km_shu_liang"    />
+        <result property="kmWeiZhi"    column="km_wei_zhi"    />
+        <result property="kmGaoDu"    column="km_gao_du"    />
+        <result property="kmKuanDu"    column="km_kuan_du"    />
+        <result property="lsCode"    column="LS_code"    />
+        <result property="planeX"    column="plane_x"    />
+        <result property="planeY"    column="plane_y"    />
+        <result property="reserve"    column="reserve"    />
+        <result property="warehouseGbCode"    column="warehouse_gb_code"    />
+        <result property="warehouseBusiness"    column="warehouse_business"    />
+        <result property="createYear"    column="create_year"    />
+        <result property="designCapacity"    column="design_capacity"    />
+        <result property="grainHeight"    column="Grain_height"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="protectionTechnology"    column="protection_technology"    />
+        <result property="reserveQualification"    column="reserve_qualification"    />
+        <result property="warehouseImgUrl"    column="warehouse_img_url"    />
+        <result property="panoramaUrl"    column="panorama_url"    />
+        <result property="remark"    column="remark"    />
+        <result property="cnZhijing"    column="cn_zhijing"    />
+        <result property="warehouseGoodsType"    column="warehouseGoodsType"    />
+        <result property="keeper"    column="keeper"    />
+        <result property="id"    column="id"    />
+        <result property="jobStatus"    column="job_status"    />
+        <result property="grainSituationIp"    column="grain_situation_ip"    />
+        <result property="grainSituationChannel"    column="grain_situation_channel"    />
+        <result property="number"    column="number"    />
+        <result property="deductionVolume"    column="deduction_volume"    />
+    </resultMap>
+
+    <sql id="selectWarehouseVo">
+        select warehouse_id, parent, org_id, org_code, warehouse_name, warehouse_number, warehouse_desc, warehouse_status,case warehouse_status when 1 then '空仓' when 2 then '封仓' when 3 then '作业' end status, warehouse_capacity, is_available, warehouse_type, warehouse_smalltype, dictinfo_code, order_index, jg_qiang_ti, jg_fang_ding, jg_fang_jia, jg_di_mian, cw_chang, cw_kuan, cw_yan_gao, cw_ding_gao, cn_chang, cn_kuan, cn_yan_gao, cn_ding_gao, km_shu_liang, km_wei_zhi, km_gao_du, km_kuan_du, LS_code, plane_x, plane_y, reserve, warehouse_gb_code, warehouse_business, create_year, design_capacity, Grain_height, longitude, latitude, protection_technology, reserve_qualification, warehouse_img_url, panorama_url, remark, cn_zhijing, warehouseGoodsType, keeper, id, job_status, grain_situation_ip, grain_situation_channel, number, deduction_volume from warehouse
+    </sql>
+
+    <select id="selectWarehouseList" parameterType="Warehouse" resultMap="WarehouseResult">
+        <include refid="selectWarehouseVo"/>
+        <where>
+            <if test="warehouseName != null  and warehouseName != ''"> and warehouse_name like concat('%', #{warehouseName}, '%')</if>
+            <if test="warehouseStatus != null "> and warehouse_status = #{warehouseStatus}</if>
+            <if test="warehouseType != null "> and warehouse_type = #{warehouseType}</if>
+        </where>
+    </select>
+
+    <select id="selectWarehouseByWarehouseId" parameterType="String" resultMap="WarehouseResult">
+        <include refid="selectWarehouseVo"/>
+        where warehouse_id = #{warehouseId}
+    </select>
+
+    <insert id="insertWarehouse" parameterType="Warehouse">
+        insert into warehouse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warehouseId != null">warehouse_id,</if>
+            <if test="parent != null">parent,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="orgCode != null">org_code,</if>
+            <if test="warehouseName != null">warehouse_name,</if>
+            <if test="warehouseNumber != null">warehouse_number,</if>
+            <if test="warehouseDesc != null">warehouse_desc,</if>
+            <if test="warehouseStatus != null">warehouse_status,</if>
+            <if test="warehouseCapacity != null">warehouse_capacity,</if>
+            <if test="isAvailable != null">is_available,</if>
+            <if test="warehouseType != null">warehouse_type,</if>
+            <if test="warehouseSmalltype != null">warehouse_smalltype,</if>
+            <if test="dictinfoCode != null">dictinfo_code,</if>
+            <if test="orderIndex != null">order_index,</if>
+            <if test="jgQiangTi != null">jg_qiang_ti,</if>
+            <if test="jgFangDing != null">jg_fang_ding,</if>
+            <if test="jgFangJia != null">jg_fang_jia,</if>
+            <if test="jgDiMian != null">jg_di_mian,</if>
+            <if test="cwChang != null">cw_chang,</if>
+            <if test="cwKuan != null">cw_kuan,</if>
+            <if test="cwYanGao != null">cw_yan_gao,</if>
+            <if test="cwDingGao != null">cw_ding_gao,</if>
+            <if test="cnChang != null">cn_chang,</if>
+            <if test="cnKuan != null">cn_kuan,</if>
+            <if test="cnYanGao != null">cn_yan_gao,</if>
+            <if test="cnDingGao != null">cn_ding_gao,</if>
+            <if test="kmShuLiang != null">km_shu_liang,</if>
+            <if test="kmWeiZhi != null">km_wei_zhi,</if>
+            <if test="kmGaoDu != null">km_gao_du,</if>
+            <if test="kmKuanDu != null">km_kuan_du,</if>
+            <if test="lsCode != null">LS_code,</if>
+            <if test="planeX != null">plane_x,</if>
+            <if test="planeY != null">plane_y,</if>
+            <if test="reserve != null">reserve,</if>
+            <if test="warehouseGbCode != null">warehouse_gb_code,</if>
+            <if test="warehouseBusiness != null">warehouse_business,</if>
+            <if test="createYear != null">create_year,</if>
+            <if test="designCapacity != null">design_capacity,</if>
+            <if test="grainHeight != null">Grain_height,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="protectionTechnology != null">protection_technology,</if>
+            <if test="reserveQualification != null">reserve_qualification,</if>
+            <if test="warehouseImgUrl != null">warehouse_img_url,</if>
+            <if test="panoramaUrl != null">panorama_url,</if>
+            <if test="remark != null">remark,</if>
+            <if test="cnZhijing != null">cn_zhijing,</if>
+            <if test="warehouseGoodsType != null">warehouseGoodsType,</if>
+            <if test="keeper != null">keeper,</if>
+            <if test="id != null">id,</if>
+            <if test="jobStatus != null">job_status,</if>
+            <if test="grainSituationIp != null">grain_situation_ip,</if>
+            <if test="grainSituationChannel != null">grain_situation_channel,</if>
+            <if test="number != null">number,</if>
+            <if test="deductionVolume != null">deduction_volume,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warehouseId != null">#{warehouseId},</if>
+            <if test="parent != null">#{parent},</if>
+            <if test="orgId != null">#{orgId},</if>
+            <if test="orgCode != null">#{orgCode},</if>
+            <if test="warehouseName != null">#{warehouseName},</if>
+            <if test="warehouseNumber != null">#{warehouseNumber},</if>
+            <if test="warehouseDesc != null">#{warehouseDesc},</if>
+            <if test="warehouseStatus != null">#{warehouseStatus},</if>
+            <if test="warehouseCapacity != null">#{warehouseCapacity},</if>
+            <if test="isAvailable != null">#{isAvailable},</if>
+            <if test="warehouseType != null">#{warehouseType},</if>
+            <if test="warehouseSmalltype != null">#{warehouseSmalltype},</if>
+            <if test="dictinfoCode != null">#{dictinfoCode},</if>
+            <if test="orderIndex != null">#{orderIndex},</if>
+            <if test="jgQiangTi != null">#{jgQiangTi},</if>
+            <if test="jgFangDing != null">#{jgFangDing},</if>
+            <if test="jgFangJia != null">#{jgFangJia},</if>
+            <if test="jgDiMian != null">#{jgDiMian},</if>
+            <if test="cwChang != null">#{cwChang},</if>
+            <if test="cwKuan != null">#{cwKuan},</if>
+            <if test="cwYanGao != null">#{cwYanGao},</if>
+            <if test="cwDingGao != null">#{cwDingGao},</if>
+            <if test="cnChang != null">#{cnChang},</if>
+            <if test="cnKuan != null">#{cnKuan},</if>
+            <if test="cnYanGao != null">#{cnYanGao},</if>
+            <if test="cnDingGao != null">#{cnDingGao},</if>
+            <if test="kmShuLiang != null">#{kmShuLiang},</if>
+            <if test="kmWeiZhi != null">#{kmWeiZhi},</if>
+            <if test="kmGaoDu != null">#{kmGaoDu},</if>
+            <if test="kmKuanDu != null">#{kmKuanDu},</if>
+            <if test="lsCode != null">#{lsCode},</if>
+            <if test="planeX != null">#{planeX},</if>
+            <if test="planeY != null">#{planeY},</if>
+            <if test="reserve != null">#{reserve},</if>
+            <if test="warehouseGbCode != null">#{warehouseGbCode},</if>
+            <if test="warehouseBusiness != null">#{warehouseBusiness},</if>
+            <if test="createYear != null">#{createYear},</if>
+            <if test="designCapacity != null">#{designCapacity},</if>
+            <if test="grainHeight != null">#{grainHeight},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="protectionTechnology != null">#{protectionTechnology},</if>
+            <if test="reserveQualification != null">#{reserveQualification},</if>
+            <if test="warehouseImgUrl != null">#{warehouseImgUrl},</if>
+            <if test="panoramaUrl != null">#{panoramaUrl},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="cnZhijing != null">#{cnZhijing},</if>
+            <if test="warehouseGoodsType != null">#{warehouseGoodsType},</if>
+            <if test="keeper != null">#{keeper},</if>
+            <if test="id != null">#{id},</if>
+            <if test="jobStatus != null">#{jobStatus},</if>
+            <if test="grainSituationIp != null">#{grainSituationIp},</if>
+            <if test="grainSituationChannel != null">#{grainSituationChannel},</if>
+            <if test="number != null">#{number},</if>
+            <if test="deductionVolume != null">#{deductionVolume},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWarehouse" parameterType="Warehouse">
+        update warehouse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parent != null">parent = #{parent},</if>
+            <if test="orgId != null">org_id = #{orgId},</if>
+            <if test="orgCode != null">org_code = #{orgCode},</if>
+            <if test="warehouseName != null">warehouse_name = #{warehouseName},</if>
+            <if test="warehouseNumber != null">warehouse_number = #{warehouseNumber},</if>
+            <if test="warehouseDesc != null">warehouse_desc = #{warehouseDesc},</if>
+            <if test="warehouseStatus != null">warehouse_status = #{warehouseStatus},</if>
+            <if test="warehouseCapacity != null">warehouse_capacity = #{warehouseCapacity},</if>
+            <if test="isAvailable != null">is_available = #{isAvailable},</if>
+            <if test="warehouseType != null">warehouse_type = #{warehouseType},</if>
+            <if test="warehouseSmalltype != null">warehouse_smalltype = #{warehouseSmalltype},</if>
+            <if test="dictinfoCode != null">dictinfo_code = #{dictinfoCode},</if>
+            <if test="orderIndex != null">order_index = #{orderIndex},</if>
+            <if test="jgQiangTi != null">jg_qiang_ti = #{jgQiangTi},</if>
+            <if test="jgFangDing != null">jg_fang_ding = #{jgFangDing},</if>
+            <if test="jgFangJia != null">jg_fang_jia = #{jgFangJia},</if>
+            <if test="jgDiMian != null">jg_di_mian = #{jgDiMian},</if>
+            <if test="cwChang != null">cw_chang = #{cwChang},</if>
+            <if test="cwKuan != null">cw_kuan = #{cwKuan},</if>
+            <if test="cwYanGao != null">cw_yan_gao = #{cwYanGao},</if>
+            <if test="cwDingGao != null">cw_ding_gao = #{cwDingGao},</if>
+            <if test="cnChang != null">cn_chang = #{cnChang},</if>
+            <if test="cnKuan != null">cn_kuan = #{cnKuan},</if>
+            <if test="cnYanGao != null">cn_yan_gao = #{cnYanGao},</if>
+            <if test="cnDingGao != null">cn_ding_gao = #{cnDingGao},</if>
+            <if test="kmShuLiang != null">km_shu_liang = #{kmShuLiang},</if>
+            <if test="kmWeiZhi != null">km_wei_zhi = #{kmWeiZhi},</if>
+            <if test="kmGaoDu != null">km_gao_du = #{kmGaoDu},</if>
+            <if test="kmKuanDu != null">km_kuan_du = #{kmKuanDu},</if>
+            <if test="lsCode != null">LS_code = #{lsCode},</if>
+            <if test="planeX != null">plane_x = #{planeX},</if>
+            <if test="planeY != null">plane_y = #{planeY},</if>
+            <if test="reserve != null">reserve = #{reserve},</if>
+            <if test="warehouseGbCode != null">warehouse_gb_code = #{warehouseGbCode},</if>
+            <if test="warehouseBusiness != null">warehouse_business = #{warehouseBusiness},</if>
+            <if test="createYear != null">create_year = #{createYear},</if>
+            <if test="designCapacity != null">design_capacity = #{designCapacity},</if>
+            <if test="grainHeight != null">Grain_height = #{grainHeight},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="protectionTechnology != null">protection_technology = #{protectionTechnology},</if>
+            <if test="reserveQualification != null">reserve_qualification = #{reserveQualification},</if>
+            <if test="warehouseImgUrl != null">warehouse_img_url = #{warehouseImgUrl},</if>
+            <if test="panoramaUrl != null">panorama_url = #{panoramaUrl},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="cnZhijing != null">cn_zhijing = #{cnZhijing},</if>
+            <if test="warehouseGoodsType != null">warehouseGoodsType = #{warehouseGoodsType},</if>
+            <if test="keeper != null">keeper = #{keeper},</if>
+            <if test="id != null">id = #{id},</if>
+            <if test="jobStatus != null">job_status = #{jobStatus},</if>
+            <if test="grainSituationIp != null">grain_situation_ip = #{grainSituationIp},</if>
+            <if test="grainSituationChannel != null">grain_situation_channel = #{grainSituationChannel},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="deductionVolume != null">deduction_volume = #{deductionVolume},</if>
+        </trim>
+        where warehouse_id = #{warehouseId}
+    </update>
+
+    <delete id="deleteWarehouseByWarehouseId" parameterType="String">
+        delete from warehouse where warehouse_id = #{warehouseId}
+    </delete>
+
+    <delete id="deleteWarehouseByWarehouseIds" parameterType="String">
+        delete from warehouse where warehouse_id in
+        <foreach item="warehouseId" collection="array" open="(" separator="," close=")">
+            #{warehouseId}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改仓房信息')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-warehouse-edit" th:object="${warehouse}">
+            <input name="warehouseId" th:field="*{warehouseId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">新增，对应数量在线监测上传数据的扣除体积。单位(m^3)：</label>
+                <div class="col-sm-8">
+                    <input name="parent" th:field="*{parent}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">所属的组织机构ID：</label>
+                <div class="col-sm-8">
+                    <input name="orgId" th:field="*{orgId}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">所属组织机构编码，对应组织机构表的code字段：</label>
+                <div class="col-sm-8">
+                    <input name="orgCode" th:field="*{orgCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓库名称：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseName" th:field="*{warehouseName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓库的人工编号，用于和粮情系统等其他系统对接：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseNumber" th:field="*{warehouseNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓库名称或仓库编号：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseDesc" th:field="*{warehouseDesc}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓房状态：1 空仓；2封仓；3 作业：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box">
+                        <input type="radio" name="warehouseStatus" value="">
+                        <label th:for="warehouseStatus" th:text="未知"></label>
+                    </div>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓房额定容量，公斤制：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseCapacity" th:field="*{warehouseCapacity}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓房是否是可用：0 仓房不可用；1 仓房可用，默认仓房是可用的状态：</label>
+                <div class="col-sm-8">
+                    <input name="isAvailable" th:field="*{isAvailable}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">仓房类型标识：</label>
+                <div class="col-sm-8">
+                    <select name="warehouseType" class="form-control m-b" required>
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">温州使用4种类型:1.大平房仓,2.中平房仓3.小平房仓4.筒仓：</label>
+                <div class="col-sm-8">
+                    <select name="warehouseSmalltype" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">例如：江苏粮食局机构代码014000255
+查询来源：全国组织机构代码管理中心http://www.nacao.org.cn/：</label>
+                <div class="col-sm-8">
+                    <input name="dictinfoCode" th:field="*{dictinfoCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">用于页面显示的时候排序：</label>
+                <div class="col-sm-8">
+                    <input name="orderIndex" th:field="*{orderIndex}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">墙体：</label>
+                <div class="col-sm-8">
+                    <input name="jgQiangTi" th:field="*{jgQiangTi}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">房顶：</label>
+                <div class="col-sm-8">
+                    <input name="jgFangDing" th:field="*{jgFangDing}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">房顶：</label>
+                <div class="col-sm-8">
+                    <input name="jgFangJia" th:field="*{jgFangJia}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">地面：</label>
+                <div class="col-sm-8">
+                    <input name="jgDiMian" th:field="*{jgDiMian}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">长：</label>
+                <div class="col-sm-8">
+                    <input name="cwChang" th:field="*{cwChang}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宽：</label>
+                <div class="col-sm-8">
+                    <input name="cwKuan" th:field="*{cwKuan}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宽：</label>
+                <div class="col-sm-8">
+                    <input name="cwYanGao" th:field="*{cwYanGao}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宽：</label>
+                <div class="col-sm-8">
+                    <input name="cwDingGao" th:field="*{cwDingGao}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宽：</label>
+                <div class="col-sm-8">
+                    <input name="cnChang" th:field="*{cnChang}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">宽：</label>
+                <div class="col-sm-8">
+                    <input name="cnKuan" th:field="*{cnKuan}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">偃高：</label>
+                <div class="col-sm-8">
+                    <input name="cnYanGao" th:field="*{cnYanGao}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="cnDingGao" th:field="*{cnDingGao}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="kmShuLiang" th:field="*{kmShuLiang}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="kmWeiZhi" th:field="*{kmWeiZhi}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="kmGaoDu" th:field="*{kmGaoDu}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="kmKuanDu" th:field="*{kmKuanDu}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="lsCode" th:field="*{lsCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="planeX" th:field="*{planeX}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="planeY" th:field="*{planeY}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <textarea name="reserve" class="form-control">[[*{reserve}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseGbCode" th:field="*{warehouseGbCode}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseBusiness" th:field="*{warehouseBusiness}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="createYear" th:field="*{createYear}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="designCapacity" th:field="*{designCapacity}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">顶高：</label>
+                <div class="col-sm-8">
+                    <input name="grainHeight" th:field="*{grainHeight}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">经度：</label>
+                <div class="col-sm-8">
+                    <input name="longitude" th:field="*{longitude}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">纬度：</label>
+                <div class="col-sm-8">
+                    <input name="latitude" th:field="*{latitude}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">纬度：</label>
+                <div class="col-sm-8">
+                    <input name="protectionTechnology" th:field="*{protectionTechnology}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预订资格：</label>
+                <div class="col-sm-8">
+                    <input name="reserveQualification" th:field="*{reserveQualification}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预订资格：</label>
+                <div class="col-sm-8">
+                    <input name="warehouseImgUrl" th:field="*{warehouseImgUrl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">全景url：</label>
+                <div class="col-sm-8">
+                    <input name="panoramaUrl" th:field="*{panoramaUrl}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="remark" th:field="*{remark}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="cnZhijing" th:field="*{cnZhijing}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓房还是货位：0代表仓房，1代表货位：</label>
+                <div class="col-sm-8">
+                    <select name="warehouseGoodsType" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">仓科保管员：</label>
+                <div class="col-sm-8">
+                    <input name="keeper" th:field="*{keeper}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label is-required">作业状态：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box">
+                        <input type="radio" name="jobStatus" value="" required>
+                        <label th:for="jobStatus" th:text="未知"></label>
+                    </div>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">粮情分机对应ip：</label>
+                <div class="col-sm-8">
+                    <input name="grainSituationIp" th:field="*{grainSituationIp}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">粮情温湿度(仓内温湿度)通道。即发送指令的第几个通道。每个仓房的温湿度通道可能不一样，不是24就是25：</label>
+                <div class="col-sm-8">
+                    <input name="grainSituationChannel" th:field="*{grainSituationChannel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">编号，用于生成粮情采集的通道指令。同时也对应着数量在线监测上传接口的仓房对应编号。：</label>
+                <div class="col-sm-8">
+                    <input name="number" th:field="*{number}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">新增，对应数量在线监测上传数据的扣除体积。单位(m^3)：</label>
+                <div class="col-sm-8">
+                    <input name="deductionVolume" th:field="*{deductionVolume}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "system/warehouse";
+        $("#form-warehouse-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-warehouse-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

@@ -6047,7 +6047,7 @@
             return $container.html();
         },
         previewZoomButtonIcons: {
-        	prev: '<i class="glyphicon glyphicon-triangle-left"></i>',
+            prev: '<i class="glyphicon glyphicon-triangle-left"></i>',
             next: '<i class="glyphicon glyphicon-triangle-right"></i>',
             toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>',
             fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>',
@@ -6280,9 +6280,9 @@
             close: 'Close detailed preview'
         }
     };
-    
+
     $.fn.fileinputLocales.zh = {
-		sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'], 
+        sizeUnits: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
         bitRateUnits: ['B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s', 'ZB/s', 'YB/s'],
         fileSingle: '文件',
         filePlural: '个文件',
@@ -6349,7 +6349,7 @@
         msgAjaxError: '{operation} 发生错误. 请重试!',
         msgAjaxProgressError: '{operation} 失败',
         msgDuplicateFile: '文件 "{name}",大小 "{size} KB" 已经被选中.忽略相同的文件.',
-        msgResumableUploadRetriesExceeded:  '文件 <b>{file}</b> 上传失败超过 <b>{max}</b> 次重试 ! 错误详情: <pre>{error}</pre>',
+        msgResumableUploadRetriesExceeded: '文件 <b>{file}</b> 上传失败超过 <b>{max}</b> 次重试 ! 错误详情: <pre>{error}</pre>',
         msgPendingTime: '{time} 剩余',
         msgCalculatingTime: '计算剩余时间',
         ajaxOperations: {
@@ -6371,7 +6371,7 @@
             indicatorSuccessTitle: '上传',
             indicatorErrorTitle: '上传错误',
             indicatorPausedTitle: '上传已暂停',
-            indicatorLoadingTitle:  '上传 &hellip;'
+            indicatorLoadingTitle: '上传 &hellip;'
         },
         previewZoomButtonTitles: {
             prev: '预览上一个文件',
@@ -6382,7 +6382,7 @@
             close: '关闭当前预览'
         }
     };
-    
+
     $.fn.fileinput.Constructor = FileInput;
 
     /**

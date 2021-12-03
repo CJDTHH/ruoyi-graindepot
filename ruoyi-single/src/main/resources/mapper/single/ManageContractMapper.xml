@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.single.mapper.ManageContractMapper">
+
+    <resultMap type="ManageContract" id="ManageContractResult">
+        <result property="contractNumber" column="contract_number"/>
+        <result property="orgId" column="org_id"/>
+        <result property="orgCode" column="org_code"/>
+        <result property="contractTitle" column="contract_title"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="grainPrice" column="grain_price"/>
+        <result property="grainQuantity" column="grain_quantity"/>
+        <result property="enableDate" column="enable_date"/>
+        <result property="disableDate" column="disable_date"/>
+        <result property="contractStatus" column="contract_status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="contractType" column="contract_type"/>
+        <result property="grainAttribute" column="grain_attribute"/>
+        <result property="grainKind" column="grain_kind"/>
+        <result property="grainAnnual" column="grain_annual"/>
+        <result property="finishedQuantity" column="finished_quantity"/>
+        <result property="approveProcessInstance" column="approve_process_instance"/>
+        <result property="remark" column="remark"/>
+        <result property="noticeId" column="notice_id"/>
+        <result property="warehousingTime" column="warehousing_time"/>
+        <result property="districtId" column="district_id"/>
+        <result property="executionOrderDetails" column="execution_order_details"/>
+    </resultMap>
+
+    <sql id="selectManageContractVo">
+        select contract_number, org_id, org_code, contract_title, customer_name, grain_price, grain_quantity,
+        enable_date, disable_date, contract_status, create_time, contract_type, grain_attribute, grain_kind,
+        grain_annual, finished_quantity, approve_process_instance, remark, notice_id, warehousing_time, district_id,
+        execution_order_details from manage_contract
+    </sql>
+
+    <select id="selectManageContractList" parameterType="ManageContract" resultMap="ManageContractResult">
+        <include refid="selectManageContractVo"/>
+        <where>
+            <if test="orgId != null ">and org_id = #{orgId}</if>
+            <if test="orgCode != null  and orgCode != ''">and org_code = #{orgCode}</if>
+            <if test="contractTitle != null  and contractTitle != ''">and contract_title = #{contractTitle}</if>
+            <if test="customerName != null  and customerName != ''">and customer_name like concat('%', #{customerName},
+                '%')
+            </if>
+            <if test="grainPrice != null ">and grain_price = #{grainPrice}</if>
+            <if test="grainQuantity != null ">and grain_quantity = #{grainQuantity}</if>
+            <if test="enableDate != null  and enableDate != ''">and enable_date = #{enableDate}</if>
+            <if test="disableDate != null  and disableDate != ''">and disable_date = #{disableDate}</if>
+            <if test="contractStatus != null ">and contract_status = #{contractStatus}</if>
+            <if test="contractType != null ">and contract_type = #{contractType}</if>
+            <if test="grainAttribute != null ">and grain_attribute = #{grainAttribute}</if>
+            <if test="grainKind != null ">and grain_kind = #{grainKind}</if>
+            <if test="grainAnnual != null  and grainAnnual != ''">and grain_annual = #{grainAnnual}</if>
+            <if test="finishedQuantity != null ">and finished_quantity = #{finishedQuantity}</if>
+            <if test="approveProcessInstance != null ">and approve_process_instance = #{approveProcessInstance}</if>
+            <if test="noticeId != null  and noticeId != ''">and notice_id = #{noticeId}</if>
+            <if test="warehousingTime != null  and warehousingTime != ''">and warehousing_time = #{warehousingTime}</if>
+            <if test="districtId != null  and districtId != ''">and district_id = #{districtId}</if>
+            <if test="executionOrderDetails != null  and executionOrderDetails != ''">and execution_order_details =
+                #{executionOrderDetails}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectManageContractByContractNumber" parameterType="String" resultMap="ManageContractResult">
+        <include refid="selectManageContractVo"/>
+        where contract_number = #{contractNumber}
+    </select>
+
+    <insert id="insertManageContract" parameterType="ManageContract">
+        insert into manage_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractNumber != null">contract_number,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="orgCode != null">org_code,</if>
+            <if test="contractTitle != null and contractTitle != ''">contract_title,</if>
+            <if test="customerName != null">customer_name,</if>
+            <if test="grainPrice != null">grain_price,</if>
+            <if test="grainQuantity != null">grain_quantity,</if>
+            <if test="enableDate != null">enable_date,</if>
+            <if test="disableDate != null">disable_date,</if>
+            <if test="contractStatus != null">contract_status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="contractType != null">contract_type,</if>
+            <if test="grainAttribute != null">grain_attribute,</if>
+            <if test="grainKind != null">grain_kind,</if>
+            <if test="grainAnnual != null">grain_annual,</if>
+            <if test="finishedQuantity != null">finished_quantity,</if>
+            <if test="approveProcessInstance != null">approve_process_instance,</if>
+            <if test="remark != null">remark,</if>
+            <if test="noticeId != null">notice_id,</if>
+            <if test="warehousingTime != null">warehousing_time,</if>
+            <if test="districtId != null">district_id,</if>
+            <if test="executionOrderDetails != null">execution_order_details,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractNumber != null">#{contractNumber},</if>
+            <if test="orgId != null">#{orgId},</if>
+            <if test="orgCode != null">#{orgCode},</if>
+            <if test="contractTitle != null and contractTitle != ''">#{contractTitle},</if>
+            <if test="customerName != null">#{customerName},</if>
+            <if test="grainPrice != null">#{grainPrice},</if>
+            <if test="grainQuantity != null">#{grainQuantity},</if>
+            <if test="enableDate != null">#{enableDate},</if>
+            <if test="disableDate != null">#{disableDate},</if>
+            <if test="contractStatus != null">#{contractStatus},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="contractType != null">#{contractType},</if>
+            <if test="grainAttribute != null">#{grainAttribute},</if>
+            <if test="grainKind != null">#{grainKind},</if>
+            <if test="grainAnnual != null">#{grainAnnual},</if>
+            <if test="finishedQuantity != null">#{finishedQuantity},</if>
+            <if test="approveProcessInstance != null">#{approveProcessInstance},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="noticeId != null">#{noticeId},</if>
+            <if test="warehousingTime != null">#{warehousingTime},</if>
+            <if test="districtId != null">#{districtId},</if>
+            <if test="executionOrderDetails != null">#{executionOrderDetails},</if>
+        </trim>
+    </insert>
+
+    <update id="updateManageContract" parameterType="ManageContract">
+        update manage_contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orgId != null">org_id = #{orgId},</if>
+            <if test="orgCode != null">org_code = #{orgCode},</if>
+            <if test="contractTitle != null and contractTitle != ''">contract_title = #{contractTitle},</if>
+            <if test="customerName != null">customer_name = #{customerName},</if>
+            <if test="grainPrice != null">grain_price = #{grainPrice},</if>
+            <if test="grainQuantity != null">grain_quantity = #{grainQuantity},</if>
+            <if test="enableDate != null">enable_date = #{enableDate},</if>
+            <if test="disableDate != null">disable_date = #{disableDate},</if>
+            <if test="contractStatus != null">contract_status = #{contractStatus},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="contractType != null">contract_type = #{contractType},</if>
+            <if test="grainAttribute != null">grain_attribute = #{grainAttribute},</if>
+            <if test="grainKind != null">grain_kind = #{grainKind},</if>
+            <if test="grainAnnual != null">grain_annual = #{grainAnnual},</if>
+            <if test="finishedQuantity != null">finished_quantity = #{finishedQuantity},</if>
+            <if test="approveProcessInstance != null">approve_process_instance = #{approveProcessInstance},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="noticeId != null">notice_id = #{noticeId},</if>
+            <if test="warehousingTime != null">warehousing_time = #{warehousingTime},</if>
+            <if test="districtId != null">district_id = #{districtId},</if>
+            <if test="executionOrderDetails != null">execution_order_details = #{executionOrderDetails},</if>
+        </trim>
+        where contract_number = #{contractNumber}
+    </update>
+
+    <delete id="deleteManageContractByContractNumber" parameterType="String">
+        delete from manage_contract where contract_number = #{contractNumber}
+    </delete>
+
+    <delete id="deleteManageContractByContractNumbers" parameterType="String">
+        delete from manage_contract where contract_number in
+        <foreach item="contractNumber" collection="array" open="(" separator="," close=")">
+            #{contractNumber}
+        </foreach>
+    </delete>
+
+</mapper>

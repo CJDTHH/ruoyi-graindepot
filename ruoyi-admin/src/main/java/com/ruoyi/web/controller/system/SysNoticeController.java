@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.system;
 
 import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,12 @@ import com.ruoyi.system.service.ISysNoticeService;
 
 /**
  * 公告 信息操作处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
 @RequestMapping("/system/notice")
-public class SysNoticeController extends BaseController
-{
+public class SysNoticeController extends BaseController {
     private String prefix = "system/notice";
 
     @Autowired
@@ -34,8 +34,7 @@ public class SysNoticeController extends BaseController
 
     @RequiresPermissions("system:notice:view")
     @GetMapping()
-    public String notice()
-    {
+    public String notice() {
         return prefix + "/notice";
     }
 
@@ -45,8 +44,7 @@ public class SysNoticeController extends BaseController
     @RequiresPermissions("system:notice:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysNotice notice)
-    {
+    public TableDataInfo list(SysNotice notice) {
         startPage();
         List<SysNotice> list = noticeService.selectNoticeList(notice);
         return getDataTable(list);
@@ -56,8 +54,7 @@ public class SysNoticeController extends BaseController
      * 新增公告
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -68,8 +65,7 @@ public class SysNoticeController extends BaseController
     @Log(title = "通知公告", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysNotice notice)
-    {
+    public AjaxResult addSave(SysNotice notice) {
         notice.setCreateBy(getLoginName());
         return toAjax(noticeService.insertNotice(notice));
     }
@@ -78,8 +74,7 @@ public class SysNoticeController extends BaseController
      * 修改公告
      */
     @GetMapping("/edit/{noticeId}")
-    public String edit(@PathVariable("noticeId") Long noticeId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("noticeId") Long noticeId, ModelMap mmap) {
         mmap.put("notice", noticeService.selectNoticeById(noticeId));
         return prefix + "/edit";
     }
@@ -91,8 +86,7 @@ public class SysNoticeController extends BaseController
     @Log(title = "通知公告", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SysNotice notice)
-    {
+    public AjaxResult editSave(SysNotice notice) {
         notice.setUpdateBy(getLoginName());
         return toAjax(noticeService.updateNotice(notice));
     }
@@ -104,8 +98,7 @@ public class SysNoticeController extends BaseController
     @Log(title = "通知公告", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
+    public AjaxResult remove(String ids) {
         return toAjax(noticeService.deleteNoticeByIds(ids));
     }
 }
